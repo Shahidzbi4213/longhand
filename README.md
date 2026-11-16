@@ -1,6 +1,7 @@
 <div align="center"><img src="docs/cover.png" alt="longhand: a quiet Markdown editor for writing books on your Mac" width="100%"/></div>
 <h1 align="center">✍️ longhand</h1>
 <h4 align="center">A quiet Markdown editor for writing books on your Mac.<br/>Native, tiny, and made for authors, with Leanpub support built in.</h4>
+<p align="center"><a href="https://shipkaro.dev/longhand"><b>🌐 shipkaro.dev/longhand</b></a> &nbsp;·&nbsp; <a href="https://github.com/wajahatkarim3/longhand/releases/latest/download/longhand.dmg"><b>⬇️ Download for Mac</b></a></p>
 <div align="center"><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fwajahatkarim3%2Flonghand&text=longhand%3A%20a%20quiet%2C%20native%20Markdown%20editor%20for%20writing%20books%20on%20the%20Mac.%20Free%20and%20open%20source&hashtags=writing%2Cmarkdown%2Cmacos%2Copensource">
         <img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social"/>
     </a> <a href="https://twitter.com/WajahatKarim">
@@ -10,6 +11,9 @@
 <br/>
 
 <div align="center">
+    <a href="https://shipkaro.dev/longhand">
+        <img src="https://img.shields.io/badge/website-shipkaro.dev%2Flonghand-1F2A4D.svg"/>
+    </a>
     <img src="https://img.shields.io/badge/license-MIT-blue.svg"/>
     <img src="https://img.shields.io/badge/macOS-14%2B-000000.svg?logo=apple"/>
     <img src="https://img.shields.io/badge/Swift-SwiftUI%20%2B%20AppKit-F05138.svg?logo=swift&logoColor=white"/>
@@ -102,6 +106,8 @@ filter, press Return to insert.
 1. Download **[longhand.dmg](https://github.com/wajahatkarim3/longhand/releases/latest/download/longhand.dmg)** (or pick a version from [Releases](https://github.com/wajahatkarim3/longhand/releases)).
 2. Open it and drag **longhand** into **Applications**.
 3. Launch it. That's it.
+
+More screenshots and the story behind it: **[shipkaro.dev/longhand](https://shipkaro.dev/longhand)**.
 
 longhand is signed with a Developer ID and notarized by Apple, so it opens without any security
 warnings. Requires macOS 14 Sonoma or later, on Apple silicon or Intel.

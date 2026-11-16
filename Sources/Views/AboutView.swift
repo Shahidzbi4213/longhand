@@ -53,7 +53,9 @@ struct AboutView: View {
             .padding(.top, 10)
 
             HStack(spacing: 6) {
-                link("longhand on GitHub", "https://github.com/wajahatkarim3/longhand")
+                link("longhand website", "https://shipkaro.dev/longhand")
+                dot
+                link("GitHub", "https://github.com/wajahatkarim3/longhand")
                 dot
                 link("RemoteKaro", "https://remotekaro.com")
             }
