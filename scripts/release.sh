@@ -26,6 +26,9 @@ xcodebuild -project Longhand.xcodeproj -scheme Longhand -configuration Release \
 
 codesign --verify --deep --strict --verbose=2 "$APP_BUILD"
 echo "  architectures: $(lipo -archs "$APP_BUILD/Contents/MacOS/longhand")"
+if codesign -d --entitlements - "$APP_BUILD" 2>/dev/null | grep -q get-task-allow; then
+  echo "✗ get-task-allow entitlement present; notarization would reject it"; exit 1
+fi
 codesign -dvv "$APP_BUILD" 2>&1 | grep -E "Authority=Developer ID Application|flags=.*runtime" >/dev/null \
   || { echo "✗ app is not Developer ID signed with hardened runtime"; exit 1; }
 
