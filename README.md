@@ -99,7 +99,18 @@ filter, press Return to insert.
 
 ## 💻 Installation
 
-longhand builds from source for now. You need macOS 14+, Xcode 16+ and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
+1. Download **[longhand.dmg](https://github.com/wajahatkarim3/longhand/releases/latest/download/longhand.dmg)** (or pick a version from [Releases](https://github.com/wajahatkarim3/longhand/releases)).
+2. Open it and drag **longhand** into **Applications**.
+3. Launch it. That's it.
+
+longhand is signed with a Developer ID and notarized by Apple, so it opens without any security
+warnings. Requires macOS 14 Sonoma or later, on Apple silicon or Intel.
+
+<details>
+<summary><b>Build from source</b></summary>
+<br/>
+
+You need Xcode 16+ and [XcodeGen](https://github.com/yonaskolb/XcodeGen).
 
 ```bash
 brew install xcodegen
@@ -109,14 +120,10 @@ xcodegen
 open Longhand.xcodeproj        # then press ⌘R
 ```
 
-Or build from the terminal:
+To make a signed, notarized DMG yourself (needs a Developer ID certificate and a
+`notarytool` keychain profile), see [`scripts/release.sh`](scripts/release.sh).
 
-```bash
-xcodebuild -scheme Longhand -configuration Release -derivedDataPath build build
-open build/Build/Products/Release/longhand.app
-```
-
-Drag `longhand.app` into `/Applications` to keep it.
+</details>
 
 <br/>
 
@@ -149,10 +156,14 @@ Drag `longhand.app` into `/Applications` to keep it.
 
 <br/>
 
-## 📖 Written with longhand: RemoteKaro
+## 📖 Land a Remote Job with RemoteKaro
 
-<a href="https://remotekaro.com"><b>RemoteKaro</b></a> is my book on landing a high-paying remote job
-from Pakistan, built on 1,237 real job rejections. Every chapter is being written and reviewed in longhand.
+<a href="https://remotekaro.com"><img src="docs/remotekaro-cover.png" alt="RemoteKaro: Land a remote job from Pakistan" width="100%"/></a>
+
+longhand was built to write this book. [**RemoteKaro**](https://remotekaro.com) is the battle-tested
+guide for Pakistani and South Asian developers who want remote jobs that pay in USD: the ATS-proof
+resume, LinkedIn, outreach, company validation, interviews and negotiation, all built on 1,237 real
+applications. Every chapter is being written and reviewed in longhand.
 
 👉 **[remotekaro.com](https://remotekaro.com)**
 

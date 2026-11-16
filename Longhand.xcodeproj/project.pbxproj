@@ -341,12 +341,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4DLAG2P9L6;
 				ENABLE_APP_SANDBOX = NO;
-				ENABLE_HARDENED_RUNTIME = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = longhand;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -355,6 +356,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
+				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wajahatkarim.longhand;
 				PRODUCT_NAME = longhand;
 				SDKROOT = macosx;
