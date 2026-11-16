@@ -15,6 +15,8 @@
 		2163AE0DAE62D286582A3631 /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 96E4B8A38A53376B569AEA59 /* Lato-BoldItalic.ttf */; };
 		21B1513506D287E54CA7F2B0 /* FileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC7F04B3E2A1F00D630418E /* FileNode.swift */; };
 		2A48820C8A2E62438A0A6385 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C469E52C357739CC595D30 /* PreviewView.swift */; };
+		2E20933DB5A86D9B21F47044 /* shipkaro-key.png in Resources */ = {isa = PBXBuildFile; fileRef = F81008E5E7BF42234A92B040 /* shipkaro-key.png */; };
+		2F0F4C2EBF3209A9A83D3DCC /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6D7D382693AC9036E8A611 /* AboutView.swift */; };
 		300250104EF09FB1C109E1F5 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 538BCF936EB88B748FFB35A6 /* Lato-Italic.ttf */; };
 		33809DF21B89DC30EEC3043A /* Markdown in Frameworks */ = {isa = PBXBuildFile; productRef = EED8731C9AC4CFE78E70E062 /* Markdown */; };
 		35643BED33A656FCB59EE560 /* iAWriterDuoS-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF2FB53514D0D8B9EFD6490A /* iAWriterDuoS-Bold.ttf */; };
@@ -63,6 +65,7 @@
 		4207CF49011E8D3B23F811EE /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
 		45FC06B2E9558E17CEA7C4B8 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		482B001AEFFF5E3B6BA418B9 /* QuietBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuietBar.swift; sourceTree = "<group>"; };
+		4E6D7D382693AC9036E8A611 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		4FC5E2F8F6BBA6083A0E7022 /* Welcome to longhand.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Welcome to longhand.md"; sourceTree = "<group>"; };
 		538BCF936EB88B748FFB35A6 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
 		543E34C0FB055A811AA7D7E0 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -87,6 +90,7 @@
 		F2248CBF8BF3B73DE37D0B2F /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		F384FE6BDDAC9D55D5275F6F /* Longhand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Longhand.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7C469E52C357739CC595D30 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		F81008E5E7BF42234A92B040 /* shipkaro-key.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shipkaro-key.png"; sourceTree = "<group>"; };
 		F9A0B07007EAC4C54866AB5A /* MarkdownRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownRenderer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +134,7 @@
 		40D39DDD8EAE493C6B10A4E9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4E6D7D382693AC9036E8A611 /* AboutView.swift */,
 				7732A960DB9D8ABB205A1342 /* DetailView.swift */,
 				482B001AEFFF5E3B6BA418B9 /* QuietBar.swift */,
 				F2248CBF8BF3B73DE37D0B2F /* SidebarView.swift */,
@@ -142,6 +147,7 @@
 			children = (
 				1F078F71E83B7F7B4B09074D /* Assets.xcassets */,
 				67791BA1E0B75297FEDE5FCA /* longhand-logo.png */,
+				F81008E5E7BF42234A92B040 /* shipkaro-key.png */,
 				4FC5E2F8F6BBA6083A0E7022 /* Welcome to longhand.md */,
 				176AD4220FF7B46134244155 /* Fonts */,
 			);
@@ -304,6 +310,7 @@
 				93722FCF7B56CB6DFE90BD5B /* iAWriterQuattroS-Italic.ttf in Resources */,
 				C792CEE2903D3DE8B8AE288E /* iAWriterQuattroS-Regular.ttf in Resources */,
 				524C2C3F17AB4BC2036B48BB /* longhand-logo.png in Resources */,
+				2E20933DB5A86D9B21F47044 /* shipkaro-key.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F0F4C2EBF3209A9A83D3DCC /* AboutView.swift in Sources */,
 				9C48C7CC0BCE03715D501941 /* ChromeState.swift in Sources */,
 				B975C26DF6DEBEFA58EE0A7A /* DetailView.swift in Sources */,
 				F5F5D8EC6F7792B55A8B61AC /* DirectoryWatcher.swift in Sources */,

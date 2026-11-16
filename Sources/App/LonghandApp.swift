@@ -17,6 +17,13 @@ struct LonghandApp: App {
         .windowToolbarStyle(.unifiedCompact(showsTitle: true))
         .commands { AppCommands(workspace: workspace) }
 
+        Window("About longhand", id: "about") {
+            AboutView()
+        }
+        .windowResizability(.contentSize)
+        .windowStyle(.hiddenTitleBar)
+        .defaultPosition(.center)
+
         Settings {
             SettingsView()
         }
@@ -112,8 +119,12 @@ struct AppCommands: Commands {
     @AppStorage(Pref.keepLineBreaks) private var keepLineBreaks = true
     @AppStorage(Pref.fontFamily) private var family: FontFamily = .quattro
     @ObservedObject private var chrome = ChromeState.shared
+    @Environment(\.openWindow) private var openWindow
 
     var body: some Commands {
+        CommandGroup(replacing: .appInfo) {
+            Button("About longhand") { openWindow(id: "about") }
+        }
         CommandGroup(replacing: .newItem) {
             Button("Open Folder…") { workspace.showOpenPanel() }
                 .keyboardShortcut("o")
