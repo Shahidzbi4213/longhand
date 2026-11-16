@@ -33,10 +33,24 @@ codesign -dvv "$APP_BUILD" 2>&1 | grep -E "Authority=Developer ID Application|fl
   || { echo "✗ app is not Developer ID signed with hardened runtime"; exit 1; }
 
 echo "▸ Packaging $DMG"
+# Background art: Design/dmg-background.tiff (regenerate with: swift scripts/dmg-background.swift
+# && tiffutil -cathidpicheck Design/dmg-background.png Design/dmg-background@2x.png -out Design/dmg-background.tiff)
+command -v create-dmg >/dev/null || { echo "✗ needs create-dmg (brew install create-dmg)"; exit 1; }
 STAGE=$(mktemp -d)
 cp -R "$APP_BUILD" "$STAGE/longhand.app"
-ln -s /Applications "$STAGE/Applications"
-hdiutil create -volname "longhand $VERSION" -srcfolder "$STAGE" -ov -format UDZO -fs HFS+ "$DMG" >/dev/null
+SetFile -a E "$STAGE/longhand.app" 2>/dev/null || true   # show "longhand", not "longhand.app"
+create-dmg \
+  --volname "longhand" \
+  --background "Design/dmg-background.tiff" \
+  --window-pos 200 140 \
+  --window-size 660 400 \
+  --icon-size 112 \
+  --text-size 13 \
+  --icon "longhand.app" 180 205 \
+  --hide-extension "longhand.app" \
+  --app-drop-link 480 205 \
+  --no-internet-enable \
+  "$DMG" "$STAGE" >/dev/null
 rm -rf "$STAGE"
 codesign --sign "$IDENTITY" --timestamp "$DMG"
 
