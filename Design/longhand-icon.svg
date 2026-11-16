@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF9EC"/>
+      <stop offset="1" stop-color="#F3E5C8"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFD36E"/>
+      <stop offset="1" stop-color="#E9A43A"/>
+    </linearGradient>
+    <linearGradient id="barrel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#F07F6E"/>
+      <stop offset="1" stop-color="#D9584A"/>
+    </linearGradient>
+    <clipPath id="squircle">
+      <rect x="100" y="100" width="824" height="824" rx="186"/>
+    </clipPath>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#5B4636" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <!-- paper tile -->
+  <rect x="100" y="100" width="824" height="824" rx="186" fill="url(#paper)" filter="url(#shadow)"/>
+
+  <g clip-path="url(#squircle)">
+    <!-- ruled lines + margin -->
+    <g stroke="#E6D6B6" stroke-width="7" stroke-linecap="round">
+      <line x1="150" y1="430" x2="880" y2="430"/>
+      <line x1="150" y1="560" x2="880" y2="560"/>
+      <line x1="150" y1="690" x2="880" y2="690"/>
+      <line x1="150" y1="820" x2="880" y2="820"/>
+    </g>
+    <line x1="196" y1="100" x2="196" y2="924" stroke="#F3B5AA" stroke-width="6"/>
+
+    <g transform="translate(-34 34)">
+    <!-- cursive ink stroke: a looped "l" flowing into the nib -->
+    <path d="M 255 700
+             C 315 700, 385 590, 420 470
+             C 452 360, 432 286, 392 298
+             C 348 312, 344 440, 372 560
+             C 396 662, 428 706, 482 700
+             C 548 692, 582 618, 618 576
+             C 640 550, 660 540, 676 546"
+          fill="none" stroke="#26345E" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- the pen: nib tip sits at the end of the stroke -->
+    <g transform="translate(688 540) rotate(45) scale(0.8)">
+      <!-- barrel (runs off the tile) -->
+      <rect x="-118" y="-760" width="236" height="440" rx="60" fill="url(#barrel)"/>
+      <rect x="-118" y="-760" width="60" height="440" rx="30" fill="#FFFFFF" opacity="0.18"/>
+      <!-- grip band -->
+      <rect x="-130" y="-345" width="260" height="58" rx="18" fill="#26345E"/>
+      <!-- nib -->
+      <path d="M 0 0 C -40 -62, -112 -150, -112 -232 L -112 -292 L 112 -292 L 112 -232 C 112 -150, 40 -62, 0 0 Z"
+            fill="url(#gold)" stroke="#B9791F" stroke-width="8" stroke-linejoin="round"/>
+      <line x1="0" y1="-14" x2="0" y2="-150" stroke="#8A5A16" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="0" cy="-166" r="14" fill="#8A5A16"/>
+    </g>
+    </g>
+  </g>
+</svg>
