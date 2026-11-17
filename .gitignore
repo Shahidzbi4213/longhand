@@ -1,5 +1,6 @@
 .build-pkgs/
 build/
+build.noindex/
 DerivedData/
 *.xcodeproj/xcuserdata/
 .DS_Store

@@ -13,16 +13,17 @@ IDENTITY="Developer ID Application: Wajahat Karim (4DLAG2P9L6)"
 PROFILE="${NOTARY_PROFILE:-longhand-notary}"
 VERSION=$(awk '/MARKETING_VERSION/ {print $2}' project.yml)
 DMG="dist/longhand-$VERSION.dmg"
-APP_BUILD="build/release/Build/Products/Release/longhand.app"
+# ".noindex" keeps Spotlight from listing this build copy next to the installed app.
+APP_BUILD="build.noindex/release/Build/Products/Release/longhand.app"
 
 echo "▸ longhand $VERSION"
-rm -rf build/release dist && mkdir -p dist
+rm -rf build.noindex/release dist && mkdir -p dist
 xcodegen generate >/dev/null
 
 echo "▸ Building Release (Developer ID, hardened runtime)"
 xcodebuild -project Longhand.xcodeproj -scheme Longhand -configuration Release \
   -destination 'generic/platform=macOS' ONLY_ACTIVE_ARCH=NO \
-  -derivedDataPath build/release -clonedSourcePackagesDirPath .build-pkgs build -quiet
+  -derivedDataPath build.noindex/release -clonedSourcePackagesDirPath .build-pkgs build -quiet
 
 codesign --verify --deep --strict --verbose=2 "$APP_BUILD"
 echo "  architectures: $(lipo -archs "$APP_BUILD/Contents/MacOS/longhand")"
