@@ -37,7 +37,9 @@ sign "$APP_BUILD"   # re-seal the app over the re-signed framework
 
 codesign --verify --deep --strict --verbose=2 "$APP_BUILD"
 for helper in Autoupdate Updater.app XPCServices/Installer.xpc XPCServices/Downloader.xpc; do
-  codesign -dvv "$SPARKLE/Versions/B/$helper" 2>&1 | grep -q "Authority=Developer ID Application" \
+  # Capture first: piping into grep -q would SIGPIPE codesign and trip pipefail.
+  info=$(codesign -dvv "$SPARKLE/Versions/B/$helper" 2>&1)
+  [[ "$info" == *"Authority=Developer ID Application"* ]] \
     || { echo "✗ Sparkle $helper is not Developer ID signed"; exit 1; }
 done
 echo "  architectures: $(lipo -archs "$APP_BUILD/Contents/MacOS/longhand")"
