@@ -152,10 +152,19 @@ final class MarkdownTextView: NSTextView {
 
     // MARK: Editing niceties
 
-    /// Continue lists / quotes on Return, like iA Writer.
+    /// Code/config file: Return keeps indentation, no list continuation or Markdown shortcuts.
+    var plainText = false
+
+    /// Continue lists / quotes on Return, like iA Writer. In plain text, just keep the indent.
     override func insertNewline(_ sender: Any?) {
         let ns = string as NSString
         let sel = selectedRange()
+        if plainText {
+            let lineStart = ns.lineRange(for: NSRange(location: sel.location, length: 0)).location
+            let head = ns.substring(with: NSRange(location: lineStart, length: sel.location - lineStart))
+            let indent = head.prefix { $0 == " " || $0 == "\t" }
+            return insertText("\n" + indent, replacementRange: sel)
+        }
         guard sel.length == 0 else { return super.insertNewline(sender) }
         let lineRange = ns.lineRange(for: NSRange(location: sel.location, length: 0))
         let line = ns.substring(with: NSRange(location: lineRange.location, length: sel.location - lineRange.location))
@@ -186,6 +195,7 @@ final class MarkdownTextView: NSTextView {
 
     /// Wrap selection with a markdown marker (⌘B / ⌘I style).
     func toggleWrap(_ marker: String) {
+        guard !plainText else { return NSSound.beep() }
         let sel = selectedRange()
         let ns = string as NSString
         let m = (marker as NSString).length

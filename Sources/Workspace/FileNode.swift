@@ -1,15 +1,29 @@
 import Foundation
 
 enum FileKind {
-    case folder, markdown, image
+    case folder, markdown, image, text
 
-    static let markdownExtensions: Set<String> = ["md", "markdown", "mdown", "mkd", "mdx", "txt"]
+    static let markdownExtensions: Set<String> = ["md", "markdown", "mdown", "mkd", "mdx", "txt", "text"]
     static let imageExtensions: Set<String> = ["png", "jpg", "jpeg", "gif", "webp", "heic", "tif", "tiff", "bmp", "svg"]
+
+    /// Code, config and data files: opened as plain text (no Markdown styling, source preview).
+    static let textExtensions: Set<String> = [
+        "c", "h", "cc", "cp", "cpp", "cxx", "c++", "hh", "hpp", "hxx", "m", "mm",
+        "swift", "kt", "kts", "java", "scala", "groovy", "gradle", "go", "rs", "dart", "cs", "fs",
+        "py", "pyw", "rb", "pl", "pm", "php", "lua", "r", "jl", "hs", "ex", "exs", "erl", "clj", "zig", "nim",
+        "js", "mjs", "cjs", "jsx", "ts", "tsx", "vue", "svelte",
+        "html", "htm", "css", "scss", "sass", "less", "xml", "xsl",
+        "json", "jsonc", "json5", "yaml", "yml", "toml", "ini", "cfg", "conf", "properties", "env",
+        "sh", "bash", "zsh", "fish", "command", "ps1", "bat",
+        "sql", "graphql", "gql", "proto", "tex", "bib", "rst", "adoc", "org",
+        "diff", "patch", "log", "csv", "tsv",
+    ]
 
     static func of(_ url: URL) -> FileKind? {
         let ext = url.pathExtension.lowercased()
         if markdownExtensions.contains(ext) { return .markdown }
         if imageExtensions.contains(ext) { return .image }
+        if textExtensions.contains(ext) { return .text }
         return nil
     }
 
@@ -18,6 +32,7 @@ enum FileKind {
         case .folder: return "folder"
         case .markdown: return "doc.text"
         case .image: return "photo"
+        case .text: return "chevron.left.forwardslash.chevron.right"
         }
     }
 }

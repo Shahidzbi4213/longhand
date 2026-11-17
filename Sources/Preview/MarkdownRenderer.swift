@@ -17,6 +17,17 @@ enum MarkdownRenderer {
         return decorate(walker.result)
     }
 
+    /// Plain-text/code file: the source as-is, monospace. Each line carries `data-line` for scroll sync.
+    static func sourceHTML(from text: String) -> String {
+        var out = "<div class=\"source\">"
+        var n = 0
+        text.enumerateLines { line, _ in
+            n += 1
+            out += "<div data-line=\"\(n)\">\(line.isEmpty ? "&#8203;" : escape(line))</div>"
+        }
+        return out + "</div>"
+    }
+
     /// Highlight review placeholders and ==marks== in rendered HTML (text only).
     static func decorate(_ html: String) -> String {
         var out = html.replacingOccurrences(

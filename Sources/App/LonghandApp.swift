@@ -2,7 +2,8 @@ import SwiftUI
 
 @main
 struct LonghandApp: App {
-    @StateObject private var workspace = Workspace()
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+    @ObservedObject private var workspace = Workspace.shared
 
     init() {
         FontFamily.registerBundledFonts()
@@ -27,6 +28,16 @@ struct LonghandApp: App {
         Settings {
             SettingsView()
         }
+    }
+}
+
+/// Receives files/folders from Finder (Open With, double-click, drop on the Dock icon).
+final class AppDelegate: NSObject, NSApplicationDelegate {
+    func application(_ application: NSApplication, open urls: [URL]) {
+        MainActor.assumeIsolated {
+            Workspace.shared.openExternal(urls)
+        }
+        NSApp.activate(ignoringOtherApps: true)
     }
 }
 

@@ -12,13 +12,17 @@ final class MarkdownDocument: ObservableObject {
     private var autosave: DispatchWorkItem?
 
     init?(url: URL) {
-        guard let data = try? Data(contentsOf: url) else { return nil }
+        // Refuse binary / non-UTF-8 files: decoding them lossily and autosaving would overwrite the original bytes.
+        guard let data = try? Data(contentsOf: url), let text = String(data: data, encoding: .utf8) else { return nil }
         self.url = url
-        self.text = String(decoding: data, as: UTF8.self)
+        self.text = text
         self.lastKnownModDate = Self.modDate(url)
     }
 
     var directory: URL { url.deletingLastPathComponent() }
+
+    /// Code/config/other text files get plain-text mode: no Markdown styling, source preview.
+    var isPlainText: Bool { FileKind.of(url) != .markdown }
 
     /// Called by the editor on every keystroke.
     func editorDidChange(_ newText: String) {
@@ -43,9 +47,8 @@ final class MarkdownDocument: ObservableObject {
     /// Reload if the file was changed by someone else and we have no unsaved edits.
     func reloadIfChangedOnDisk() {
         guard !isDirty, let date = Self.modDate(url), date != lastKnownModDate,
-              let data = try? Data(contentsOf: url) else { return }
+              let data = try? Data(contentsOf: url), let newText = String(data: data, encoding: .utf8) else { return }
         lastKnownModDate = date
-        let newText = String(decoding: data, as: UTF8.self)
         if newText != text {
             text = newText
             revision += 1

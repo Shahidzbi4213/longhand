@@ -35,19 +35,19 @@ struct DetailView: View {
         if let doc = workspace.document {
             switch mode {
             case .write:
-                EditorView(document: doc, config: config(wysiwyg: true), scrollBridge: nil)
+                EditorView(document: doc, config: config(wysiwyg: true, plain: doc.isPlainText), scrollBridge: nil)
                     .id(doc.url)
             case .split:
                 HSplitView {
-                    EditorView(document: doc, config: config(wysiwyg: false), scrollBridge: scrollBridge)
+                    EditorView(document: doc, config: config(wysiwyg: false, plain: doc.isPlainText), scrollBridge: scrollBridge)
                         .frame(minWidth: 280)
-                    PreviewView(document: doc, theme: theme, family: family, fontSize: CGFloat(fontSize), lineWidth: lineWidth, keepLineBreaks: keepLineBreaks,
+                    PreviewView(document: doc, theme: theme, family: family, fontSize: CGFloat(fontSize), lineWidth: doc.isPlainText ? .wide : lineWidth, keepLineBreaks: keepLineBreaks, plainText: doc.isPlainText,
                                 scrollBridge: scrollBridge, onOpenFile: workspace.openLinkedFile)
                         .frame(minWidth: 280)
                 }
                 .id(doc.url)
             case .preview:
-                PreviewView(document: doc, theme: theme, family: family, fontSize: CGFloat(fontSize), lineWidth: lineWidth, keepLineBreaks: keepLineBreaks,
+                PreviewView(document: doc, theme: theme, family: family, fontSize: CGFloat(fontSize), lineWidth: doc.isPlainText ? .wide : lineWidth, keepLineBreaks: keepLineBreaks, plainText: doc.isPlainText,
                             scrollBridge: nil, onOpenFile: workspace.openLinkedFile)
                     .id(doc.url)
             }
@@ -58,7 +58,7 @@ struct DetailView: View {
         }
     }
 
-    private func config(wysiwyg: Bool) -> EditorConfig {
+    private func config(wysiwyg: Bool, plain: Bool) -> EditorConfig {
         var c = EditorConfig()
         c.theme = theme
         c.family = family
@@ -69,12 +69,20 @@ struct DetailView: View {
         c.focusMode = focusMode
         c.typewriter = typewriter
         c.scaleHeadings = true
+        if plain {
+            c.plainText = true
+            c.hideSyntax = false
+            c.inlineImages = false
+            c.lineWidth = .wide   // code lines are long
+        }
         return c
     }
 
     private var title: String {
         if let doc = workspace.document {
-            return doc.url.deletingPathExtension().lastPathComponent + (doc.isDirty ? " •" : "")
+            // Code files keep their extension: main.cpp vs main.h matters.
+            let name = doc.isPlainText ? doc.url.lastPathComponent : doc.url.deletingPathExtension().lastPathComponent
+            return name + (doc.isDirty ? " •" : "")
         }
         if let img = workspace.imageURL { return img.lastPathComponent }
         return workspace.rootURL?.lastPathComponent ?? "longhand"

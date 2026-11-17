@@ -136,7 +136,9 @@ To make a signed, notarized DMG yourself (needs a Developer ID certificate and a
 ## ❓ Usage
 
 1. **Open a folder** (⌘O): your book, your notes, anything with Markdown files. Every chapter and image shows up in the sidebar.
+   Or use Finder's **Open With › longhand** on a file, or drop a folder on the Dock icon.
 2. **Write.** Everything saves automatically.
+   Code and config files (`.json`, `.yaml`, `.swift`, `.kt`, `.cpp`, `.py`, …) open as plain text: monospace, no Markdown styling, and Preview shows the source as-is.
 3. Switch views with ⌘1 / ⌘2 / ⌘3, and use `/` whenever you need a block.
 
 <details>

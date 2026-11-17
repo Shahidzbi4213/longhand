@@ -3,6 +3,14 @@ import Combine
 
 @MainActor
 final class Workspace: ObservableObject {
+    /// One workspace per app; shared so the app delegate can route Finder "Open With" events to it.
+    static let shared = Workspace()
+
+    /// Set once a file/folder arrives from Finder, so the first-launch welcome note doesn't replace it.
+    private var openedExternally = false
+    /// A plain-text file from Finder whose extension isn't in `FileKind`; opened as text anyway.
+    private var externalTextFile: URL?
+
     @Published private(set) var rootURL: URL?
     @Published private(set) var tree: [FileNode] = []
     @Published private(set) var document: MarkdownDocument?
@@ -26,7 +34,10 @@ final class Workspace: ObservableObject {
     init() {
         if !UserDefaults.standard.bool(forKey: Keys.welcomeShown) {
             UserDefaults.standard.set(true, forKey: Keys.welcomeShown)
-            DispatchQueue.main.async { [weak self] in self?.openWelcome() }
+            DispatchQueue.main.async { [weak self] in
+                guard let self, !self.openedExternally else { return }
+                self.openWelcome()
+            }
         }
         if let path = UserDefaults.standard.string(forKey: Keys.lastFolder),
            FileManager.default.fileExists(atPath: path) {
@@ -76,6 +87,27 @@ final class Workspace: ObservableObject {
         }
     }
 
+    /// Files or folders handed over by Finder (Open With, double-click, drop on the Dock icon).
+    /// Only one workspace is shown at a time, so the last usable URL wins.
+    func openExternal(_ urls: [URL]) {
+        guard let url = urls.last(where: { $0.isFileURL })?.standardizedFileURL else { return }
+        openedExternally = true
+        var isDir: ObjCBool = false
+        guard FileManager.default.fileExists(atPath: url.path, isDirectory: &isDir) else { return }
+        if isDir.boolValue {
+            openFolder(url)
+            return
+        }
+        // A file already inside the open workspace just gets selected; otherwise open its folder.
+        let root = rootURL?.standardizedFileURL.path
+        if root == nil || !url.path.hasPrefix(root! + "/") {
+            openFolder(url.deletingLastPathComponent())
+        }
+        // Plain text with an extension the sidebar doesn't list still opens, as plain text.
+        if FileKind.of(url) == nil { externalTextFile = url }
+        selection = url
+    }
+
     func openFolder(_ url: URL) {
         document?.save()
         rootURL = url
@@ -112,13 +144,13 @@ final class Workspace: ObservableObject {
 
     private func open(_ url: URL?) {
         document?.save()
-        guard let url, let kind = FileKind.of(url) else {
+        guard let url, let kind = FileKind.of(url) ?? (url == externalTextFile ? .text : nil) else {
             // folders or nil: keep current document visible
             if url == nil { document = nil; imageURL = nil }
             return
         }
         switch kind {
-        case .markdown:
+        case .markdown, .text:
             document = MarkdownDocument(url: url)
             imageURL = nil
             docCancellable = document?.objectWillChange.sink { [weak self] _ in

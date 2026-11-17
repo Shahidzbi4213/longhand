@@ -21,6 +21,7 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.wajahatkarim.longhand
         SWIFT_VERSION: "5.0"
         GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_FILE: Config/Info.plist
         INFOPLIST_KEY_CFBundleDisplayName: "longhand"
         INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.productivity
         MARKETING_VERSION: 0.1.1

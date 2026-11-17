@@ -126,9 +126,11 @@ struct EditorView: NSViewRepresentable {
             styler.contentWidth = tv.contentWidth
             tv.columnWidth = new.lineWidth.points
             tv.typewriter = new.typewriter
+            tv.plainText = new.plainText
+            tv.isContinuousSpellCheckingEnabled = !new.plainText
             tv.typingAttributes = styler.baseAttributes
             if force || old.theme != new.theme || old.family != new.family || old.fontSize != new.fontSize || old.hideSyntax != new.hideSyntax
-                || old.inlineImages != new.inlineImages || old.scaleHeadings != new.scaleHeadings {
+                || old.inlineImages != new.inlineImages || old.scaleHeadings != new.scaleHeadings || old.plainText != new.plainText {
                 restyleAll()
             }
             updateFocus()
@@ -185,7 +187,7 @@ struct EditorView: NSViewRepresentable {
 
         func textView(_ textView: NSTextView, shouldChangeTextIn range: NSRange, replacementString: String?) -> Bool {
             pendingSlash = nil
-            if let r = replacementString, range.length == 0,
+            if !config.plainText, let r = replacementString, range.length == 0,
                SlashMenuController.shouldTrigger(r, at: range.location, in: textView.string as NSString),
                !styler.codeBlocks.contains(where: { NSLocationInRange(range.location, $0) }) {
                 pendingSlash = range.location

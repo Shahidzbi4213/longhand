@@ -259,6 +259,7 @@ struct EditorConfig: Equatable {
     var focusMode = false
     var typewriter = false
     var scaleHeadings = true
+    var plainText = false          // true = code/config file: monospace, no Markdown styling
 }
 
 /// Builds and caches fonts for the editor.

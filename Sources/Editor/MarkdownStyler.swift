@@ -68,7 +68,12 @@ final class MarkdownStyler {
     }
 
     var baseAttributes: [NSAttributedString.Key: Any] {
-        [.font: bodyFont, .foregroundColor: Palette.text, .paragraphStyle: paragraphStyle()]
+        if config.plainText {
+            // Slightly smaller than prose so typical code lines fit the column.
+            return [.font: fonts.font(size: max(11, config.fontSize - 2), mono: true), .foregroundColor: Palette.text,
+                    .paragraphStyle: paragraphStyle(multiple: 1.3)]
+        }
+        return [.font: bodyFont, .foregroundColor: Palette.text, .paragraphStyle: paragraphStyle()]
     }
 
     // MARK: Code blocks
@@ -76,6 +81,10 @@ final class MarkdownStyler {
     /// Recompute fenced code block ranges. Returns true if they changed.
     @discardableResult
     func updateCodeBlocks(in string: NSString) -> Bool {
+        if config.plainText {
+            defer { codeBlocks = [] }
+            return !codeBlocks.isEmpty
+        }
         var blocks: [NSRange] = []
         var openStart: Int?
         var fence = ""
@@ -112,6 +121,7 @@ final class MarkdownStyler {
         let clamped = NSIntersectionRange(requested, NSRange(location: 0, length: ns.length))
         let range = ns.paragraphRange(for: NSRange(location: clamped.location, length: clamped.length))
         storage.setAttributes(baseAttributes, range: range)
+        if config.plainText { return }
 
         ns.enumerateSubstrings(in: range, options: [.byLines, .substringNotRequired]) { _, lineRange, enclosing, _ in
             let isActive: Bool = {

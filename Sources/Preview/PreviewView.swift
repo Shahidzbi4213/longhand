@@ -58,6 +58,7 @@ struct PreviewView: NSViewRepresentable {
     var fontSize: CGFloat
     var lineWidth: LineWidth
     var keepLineBreaks: Bool = true
+    var plainText = false
     var scrollBridge: ScrollBridge?
     var onOpenFile: (URL) -> Bool
 
@@ -118,9 +119,11 @@ struct PreviewView: NSViewRepresentable {
             let first = lastText == nil
             lastText = text
             let directory = parent.document.directory
+            let plain = parent.plainText
             renderWork?.cancel()
             let work = DispatchWorkItem { [weak self] in
-                self?.push(MarkdownRenderer.html(from: text, documentDirectory: directory, keepLineBreaks: breaks))
+                self?.push(plain ? MarkdownRenderer.sourceHTML(from: text)
+                                 : MarkdownRenderer.html(from: text, documentDirectory: directory, keepLineBreaks: breaks))
             }
             renderWork = work
             DispatchQueue.main.asyncAfter(deadline: .now() + (first ? 0 : 0.15), execute: work)
@@ -214,6 +217,7 @@ enum PreviewTemplate {
         code { font: 0.9em ui-monospace, 'SF Mono', Menlo, monospace; background: var(--code-bg); color: var(--code); padding: 0.12em 0.35em; border-radius: 4px; }
         pre { background: var(--code-bg); padding: 14px 16px; border-radius: 8px; overflow-x: auto; line-height: 1.45; }
         pre code { background: none; padding: 0; color: var(--text); }
+        .source { font: 0.88em/1.45 ui-monospace, 'SF Mono', Menlo, monospace; white-space: pre-wrap; overflow-wrap: anywhere; tab-size: 4; }
         hr { border: 0; height: 1px; background: var(--rule); margin: 2.4em 30%; }
         figure { margin-left: 0; margin-right: 0; }
         figure img { max-width: 100%; border-radius: 6px; display: block; margin: 0 auto; }
