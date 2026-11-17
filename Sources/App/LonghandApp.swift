@@ -7,6 +7,7 @@ struct LonghandApp: App {
 
     init() {
         FontFamily.registerBundledFonts()
+        _ = Updater.shared   // start Sparkle at launch so scheduled update checks run
     }
 
     var body: some Scene {
@@ -135,6 +136,7 @@ struct AppCommands: Commands {
     var body: some Commands {
         CommandGroup(replacing: .appInfo) {
             Button("About longhand") { openWindow(id: "about") }
+            CheckForUpdatesButton()
         }
         CommandGroup(replacing: .newItem) {
             Button("Open Folder…") { workspace.showOpenPanel() }

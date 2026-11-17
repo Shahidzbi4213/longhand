@@ -25,7 +25,21 @@ xcodebuild -project Longhand.xcodeproj -scheme Longhand -configuration Release \
   -destination 'generic/platform=macOS' ONLY_ACTIVE_ARCH=NO \
   -derivedDataPath build.noindex/release -clonedSourcePackagesDirPath .build-pkgs build -quiet
 
+echo "▸ Signing Sparkle helpers (Xcode leaves them ad-hoc signed; notarization rejects that)"
+SPARKLE="$APP_BUILD/Contents/Frameworks/Sparkle.framework"
+sign() { codesign -f -s "$IDENTITY" -o runtime --timestamp --preserve-metadata=entitlements "$@"; }
+sign "$SPARKLE/Versions/B/XPCServices/Installer.xpc"
+sign "$SPARKLE/Versions/B/XPCServices/Downloader.xpc"
+sign "$SPARKLE/Versions/B/Autoupdate"
+sign "$SPARKLE/Versions/B/Updater.app"
+sign "$SPARKLE"
+sign "$APP_BUILD"   # re-seal the app over the re-signed framework
+
 codesign --verify --deep --strict --verbose=2 "$APP_BUILD"
+for helper in Autoupdate Updater.app XPCServices/Installer.xpc XPCServices/Downloader.xpc; do
+  codesign -dvv "$SPARKLE/Versions/B/$helper" 2>&1 | grep -q "Authority=Developer ID Application" \
+    || { echo "✗ Sparkle $helper is not Developer ID signed"; exit 1; }
+done
 echo "  architectures: $(lipo -archs "$APP_BUILD/Contents/MacOS/longhand")"
 if codesign -d --entitlements - "$APP_BUILD" 2>/dev/null | grep -q get-task-allow; then
   echo "✗ get-task-allow entitlement present; notarization would reject it"; exit 1

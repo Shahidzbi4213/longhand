@@ -40,6 +40,7 @@
 		9666A13E2A52619981262361 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F078F71E83B7F7B4B09074D /* Assets.xcassets */; };
 		9B5C08498E1E892E61C016CA /* iAWriterDuoS-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA0A939868AEF2F6EE4FA523 /* iAWriterDuoS-Italic.ttf */; };
 		9C48C7CC0BCE03715D501941 /* ChromeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38E43F8E8DDCF04E71A6542 /* ChromeState.swift */; };
+		ABD69722FC7618C3F6F6422C /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 39F2BD1448462DD53CCB1C17 /* Sparkle */; };
 		B56E158D68C37B0343DEF24E /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D25622B7E3F0C90831CC66 /* EditorView.swift */; };
 		B975C26DF6DEBEFA58EE0A7A /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7732A960DB9D8ABB205A1342 /* DetailView.swift */; };
 		C792CEE2903D3DE8B8AE288E /* iAWriterQuattroS-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B090DAFA35DF7B79E832A6 /* iAWriterQuattroS-Regular.ttf */; };
@@ -47,6 +48,7 @@
 		D0D5CB3B8861FBB11CA3719E /* iAWriterMonoS-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C7B6C84BB90B9BB274F7992 /* iAWriterMonoS-BoldItalic.ttf */; };
 		D776F4ACC97F25A5376D21BD /* LICENSE-iA-Fonts.md in Resources */ = {isa = PBXBuildFile; fileRef = 9CED3359A64367E3D8CA117A /* LICENSE-iA-Fonts.md */; };
 		F5F5D8EC6F7792B55A8B61AC /* DirectoryWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280ED2ADFBC5051F6550799A /* DirectoryWatcher.swift */; };
+		FBC795FAED44EC7E3EDD7463 /* Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DAC0E0DF70C415AC9C11DF4 /* Updater.swift */; };
 		FF5661C21B9C61F5FF607901 /* Welcome to longhand.md in Resources */ = {isa = PBXBuildFile; fileRef = 4FC5E2F8F6BBA6083A0E7022 /* Welcome to longhand.md */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +80,7 @@
 		8A0F989948574AF3A70661BC /* iAWriterQuattroS-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iAWriterQuattroS-BoldItalic.ttf"; sourceTree = "<group>"; };
 		96E4B8A38A53376B569AEA59 /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
 		9CED3359A64367E3D8CA117A /* LICENSE-iA-Fonts.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "LICENSE-iA-Fonts.md"; sourceTree = "<group>"; };
+		9DAC0E0DF70C415AC9C11DF4 /* Updater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updater.swift; sourceTree = "<group>"; };
 		AD510CE4CBB28DAD2A49BFDE /* Workspace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
 		B38E43F8E8DDCF04E71A6542 /* ChromeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChromeState.swift; sourceTree = "<group>"; };
 		C6B27237218B7BC45F09C9D2 /* iAWriterDuoS-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iAWriterDuoS-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -100,6 +103,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33809DF21B89DC30EEC3043A /* Markdown in Frameworks */,
+				ABD69722FC7618C3F6F6422C /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,6 +174,7 @@
 			children = (
 				B38E43F8E8DDCF04E71A6542 /* ChromeState.swift */,
 				D29B29BC5B439FA871321E37 /* LonghandApp.swift */,
+				9DAC0E0DF70C415AC9C11DF4 /* Updater.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 			name = Longhand;
 			packageProductDependencies = (
 				EED8731C9AC4CFE78E70E062 /* Markdown */,
+				39F2BD1448462DD53CCB1C17 /* Sparkle */,
 			);
 			productName = Longhand;
 			productReference = F384FE6BDDAC9D55D5275F6F /* Longhand.app */;
@@ -273,6 +279,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				3221B576AE7C3365AC153063 /* XCRemoteSwiftPackageReference "swift-markdown" */,
+				13F246C2D8DA8BA6074519D6 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CEACF68772BAE2FBDB128401 /* Products */;
@@ -338,6 +345,7 @@
 				C8E6C4FE1832775D8DE0E5A8 /* SidebarView.swift in Sources */,
 				43B06BC7E59077A21647DA70 /* SlashMenu.swift in Sources */,
 				954D045977780D65BA7FF827 /* Theme.swift in Sources */,
+				FBC795FAED44EC7E3EDD7463 /* Updater.swift in Sources */,
 				5C1EE08FDCB03C3F512BA7B4 /* Workspace.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -543,6 +551,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		13F246C2D8DA8BA6074519D6 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		3221B576AE7C3365AC153063 /* XCRemoteSwiftPackageReference "swift-markdown" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/swiftlang/swift-markdown";
@@ -554,6 +570,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		39F2BD1448462DD53CCB1C17 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 13F246C2D8DA8BA6074519D6 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
 		EED8731C9AC4CFE78E70E062 /* Markdown */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3221B576AE7C3365AC153063 /* XCRemoteSwiftPackageReference "swift-markdown" */;

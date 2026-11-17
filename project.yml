@@ -8,6 +8,9 @@ packages:
   Markdown:
     url: https://github.com/swiftlang/swift-markdown
     from: 0.5.0
+  Sparkle:
+    url: https://github.com/sparkle-project/Sparkle
+    from: 2.0.0
 targets:
   Longhand:
     type: application
@@ -15,6 +18,7 @@ targets:
     sources: [Sources, Resources]
     dependencies:
       - package: Markdown
+      - package: Sparkle
     settings:
       base:
         PRODUCT_NAME: "longhand"

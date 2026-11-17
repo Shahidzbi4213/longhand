@@ -4,6 +4,11 @@
      INFOPLIST_KEY_* build settings can't express: the document types longhand opens. -->
 <plist version="1.0">
 <dict>
+	<!-- Sparkle updates, served by Amore (amore.computer). -->
+	<key>SUFeedURL</key>
+	<string>https://api.amore.computer/v1/apps/com.wajahatkarim.longhand/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>lqHYDitcKOEYBiW7Ii8MHWGNxUpd1OV1wGP51mpvpNs=</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
