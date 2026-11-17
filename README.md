@@ -1,7 +1,7 @@
 <div align="center"><img src="docs/cover.png" alt="longhand: a quiet Markdown editor for writing books on your Mac" width="100%"/></div>
 <h1 align="center">✍️ longhand</h1>
 <h4 align="center">A quiet Markdown editor for writing books on your Mac.<br/>Native, tiny, and made for authors, with Leanpub support built in.</h4>
-<p align="center"><a href="https://shipkaro.dev/longhand"><b>🌐 shipkaro.dev/longhand</b></a> &nbsp;·&nbsp; <a href="https://github.com/wajahatkarim3/longhand/releases/latest/download/longhand.dmg"><b>⬇️ Download for Mac</b></a></p>
+<p align="center"><a href="https://shipkaro.dev/longhand"><b>🌐 shipkaro.dev/longhand</b></a> &nbsp;·&nbsp; <a href="https://api.amore.computer/v1/apps/com.wajahatkarim.longhand/download"><b>⬇️ Download for Mac</b></a></p>
 <div align="center"><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fgithub.com%2Fwajahatkarim3%2Flonghand&text=longhand%3A%20a%20quiet%2C%20native%20Markdown%20editor%20for%20writing%20books%20on%20the%20Mac.%20Free%20and%20open%20source&hashtags=writing%2Cmarkdown%2Cmacos%2Copensource">
         <img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social"/>
     </a> <a href="https://twitter.com/WajahatKarim">
@@ -103,14 +103,15 @@ filter, press Return to insert.
 
 ## 💻 Installation
 
-1. Download **[longhand.dmg](https://github.com/wajahatkarim3/longhand/releases/latest/download/longhand.dmg)** (or pick a version from [Releases](https://github.com/wajahatkarim3/longhand/releases)).
+1. Download **[longhand.dmg](https://api.amore.computer/v1/apps/com.wajahatkarim.longhand/download)** (or pick a version from [Releases](https://github.com/wajahatkarim3/longhand/releases)).
 2. Open it and drag **longhand** into **Applications**.
 3. Launch it. That's it.
 
 More screenshots and the story behind it: **[shipkaro.dev/longhand](https://shipkaro.dev/longhand)**.
 
 longhand is signed with a Developer ID and notarized by Apple, so it opens without any security
-warnings. Requires macOS 14 Sonoma or later, on Apple silicon or Intel.
+warnings. It updates itself (or use **longhand → Check for Updates…**); see what's new in the
+[changelog](CHANGELOG.md). Requires macOS 14 Sonoma or later, on Apple silicon or Intel.
 
 <details>
 <summary><b>Build from source</b></summary>
@@ -127,7 +128,7 @@ open Longhand.xcodeproj        # then press ⌘R
 ```
 
 To make a signed, notarized DMG yourself (needs a Developer ID certificate and a
-`notarytool` keychain profile), see [`scripts/release.sh`](scripts/release.sh).
+`notarytool` keychain profile), see [`docs/RELEASING.md`](docs/RELEASING.md).
 
 </details>
 
